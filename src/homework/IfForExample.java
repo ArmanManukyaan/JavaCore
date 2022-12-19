@@ -5,7 +5,13 @@ public class IfForExample {
 
         int b = 12,a=4;
 
-        System.out.println("max " + b);
+        if(b>a){
+            System.out.println("max"+b);
+
+        }else{
+            System.out.println("max"+a);
+        }
+
         System.out.println("End");
 
 
