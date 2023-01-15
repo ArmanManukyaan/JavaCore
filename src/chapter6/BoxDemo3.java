@@ -13,6 +13,7 @@ public class BoxDemo3 {
         mybox2.height = 6;
         mybox2.depth =9;
 
+
         mybox1.volume();
         mybox2.volume();
 
