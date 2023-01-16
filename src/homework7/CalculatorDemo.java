@@ -1,6 +1,4 @@
-package homevork7;
-
-import java.util.concurrent.Callable;
+package homework7;
 
 public class CalculatorDemo {
     public static void main(String[] args) {
@@ -24,7 +22,6 @@ public class CalculatorDemo {
 
         result = myCalculator.divide(10 ,5);
         System.out.println("divide :"+result);
-
         result = myCalculator.divide(4,0);
         System.out.println(result);
 
