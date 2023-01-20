@@ -1,4 +1,4 @@
-package chapter6.Demo6;
+package chapter7.Demo6;
 
 public class PassOb {
     public static void main(String[] args) {

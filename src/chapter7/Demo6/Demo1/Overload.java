@@ -1,4 +1,4 @@
-package chapter6.Demo6.Demo1;
+package chapter7.Demo6.Demo1;
 
 public class Overload {
     void test(){

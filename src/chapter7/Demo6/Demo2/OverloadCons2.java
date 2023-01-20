@@ -1,4 +1,4 @@
-package chapter6.Demo6.Demo2;
+package chapter7.Demo6.Demo2;
 
 public class OverloadCons2 {
     public static void main(String[] args) {

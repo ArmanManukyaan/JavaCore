@@ -1,4 +1,4 @@
-package chapter6.Demo6.Demo3;
+package chapter7.Demo6.Demo3;
 
 public class Test {
     void meth(int i, int j) {

@@ -1,4 +1,4 @@
-package chapter6.Demo6.Demo5;
+package chapter7.Demo6.Demo5;
 
 public class RetOb {
     public static void main(String[] args) {
