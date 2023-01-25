@@ -26,19 +26,22 @@ public class BraceChecker {
                 case ')':
                     symbol = (char) stack.pop(a);
                     if (symbol != '(') {
-                        System.out.println("Error at :"+ i + " opened" + symbol + "but closed" + a);
+                        System.out.println("Error at :" + i + " opened" + symbol + "but closed" + a);
                         break;
                     }
                 case ']':
-                    symbol = (char) stack.pop(a);
+                    symbol = (char)
+                            stack.pop(a);
                     if (symbol != '[') {
                         System.out.println("Error at :" + i + " opened" + symbol + "but closed" + a);
                         break;
                     }
                 case '}':
-                    symbol = (char) stack.pop(a);
+
+                    symbol = (char)
+                            stack.pop(a);
                     if (symbol != '{') {
-                        System.out.println("Error at :" + i + ": opened" + symbol+ "[but closed" + a);
+                        System.out.println("Error at :" + i + ": opened" + symbol + "[but closed" + a);
                         break;
                     }
             }
