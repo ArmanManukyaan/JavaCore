@@ -38,7 +38,7 @@ public class BraceChecker {
                     symbol = (char)
                             stack.pop(a);
                     if (symbol != '{') {
-                        System.out.println("Error at :" + i + ": opened" + symbol + "[but closed" + a);
+                        System.out.println("Error at :" + i + " opened" + symbol + "but closed" + a);
                         break;
                     }
             }
