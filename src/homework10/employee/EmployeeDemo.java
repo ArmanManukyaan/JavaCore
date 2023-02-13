@@ -3,9 +3,12 @@ package homework10.employee;
 import java.util.Scanner;
 
 public class EmployeeDemo {
+    static Scanner scanner = new Scanner(System.in);
+    static EmployStorage employStorage = new EmployStorage();
+
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-        EmployStorage employStorage = new EmployStorage();
+
+
         boolean isRun = true;
         while (isRun) {
             System.out.println("input 0 for exit");
@@ -19,29 +22,13 @@ public class EmployeeDemo {
                     isRun = false;
                     break;
                 case "1":
-                    System.out.println("Please input name");
-                    String name = scanner.nextLine();
-                    System.out.println("Please input surname");
-                    String surname = scanner.nextLine();
-                    System.out.println("Please input employeeID");
-                    String employeeId = scanner.nextLine();
-                    System.out.println("Please input salary");
-                    String salary = scanner.nextLine();
-                    System.out.println("Please input company name");
-                    String company = scanner.nextLine();
-                    System.out.println("Please input position");
-                    String position = scanner.nextLine();
-                    Employee employee = new Employee(name, surname, employeeId, Double.parseDouble(salary), company, position);
-                    employStorage.add(employee);
-                    System.out.println("Employee data has been created");
+                    addEmployee();
                     break;
                 case "2":
                     employStorage.print();
                     break;
                 case "3":
-                    System.out.println("please input employeeID");
-                    String employeeID = scanner.nextLine();
-                    employStorage.searchByID(employeeID);
+                    getEmployeeById();
                     break;
                 case "4":
                     System.out.println("please input company name");
@@ -52,5 +39,32 @@ public class EmployeeDemo {
 
         }
 
+    }
+
+    private static void getEmployeeById() {
+        System.out.println("please input employeeID");
+        String Id = scanner.nextLine();
+        Employee employee = employStorage.getEmployeeById(Id);
+
+        if (employee == null) {
+            System.out.println("employee wait " + Id + " id dose not Id");
+        } else {
+            System.out.println(employee);
+        }
+    }
+    static void addEmployee() {
+        System.out.println("Please input name,surname,employeeId,salary,companyName,position");
+        String employeeDataStr = scanner.nextLine();
+        String[] employeeData = employeeDataStr.split(",");
+        String employeeId = employeeData[2];
+        Employee employeeID = employStorage.getEmployeeById(employeeId);
+        if (employeeID == null) {
+            Employee employee = new Employee(employeeData[0], employeeData[1],
+                    employeeId, Double.parseDouble(employeeData[3]), employeeData[4], employeeData[5]);
+            employStorage.add(employee);
+            System.out.println("Employee was added!");
+        } else {
+            System.out.println("Employee with " + employeeID + " id already exists");
+        }
     }
 }

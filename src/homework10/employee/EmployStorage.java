@@ -1,42 +1,65 @@
 package homework10.employee;
 
 import Tester.Book;
+
+import java.util.Scanner;
+
 public class EmployStorage {
-    private Employee[] array = new Employee[10];
+
+    private Employee[] employees = new Employee[10];
     private int size = 0;
+
     public void add(Employee value) {
-        if (size == array.length) {
+        if (size == employees.length) {
             extend();
         }
-        array[size++] = value;
+        employees[size++] = value;
     }
+
     public void extend() {
-        Employee result[] = new Employee[array.length + 10];
+        Employee result[] = new Employee[employees.length + 10];
         for (int i = 0; i < size; i++) {
-            result[i] = array[i];
+            result[i] = employees[i];
         }
-        array = result;
+        employees = result;
     }
     public void print() {
         for (int i = 0; i < size; i++) {
-            System.out.println(array[i] + " ");
+            System.out.println(employees[i] + " ");
         }
     }
-    public void searchByID(String employeeID) {
+    public Employee getEmployeeById(String employeeID) {
         for (int i = 0; i < size; i++) {
-            Employee employee = array[i];
-            if(employee.getEmployeeID().toLowerCase().contains(employeeID.toLowerCase())){
-                System.out.println(employee);
+            Employee employee = employees[i];
+            if (employee.getEmployeeID().contains(employeeID)) {
+             return employee;
             }
         }
+        return null ;
     }
+
     public void searchByCompany(String companyName) {
         for (int i = 0; i < size; i++) {
-            Employee employee = array[i];
-            if(employee.getCompany().toLowerCase().contains(companyName.toLowerCase())){
+            Employee employee = employees[i];
+            if (employee.getCompany().toLowerCase().contains(companyName.toLowerCase())) {
                 System.out.println(employee);
             }
-
         }
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
 }
+
+
+
