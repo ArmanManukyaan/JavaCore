@@ -9,11 +9,11 @@ public class EmployStorage {
     private Employee[] employees = new Employee[10];
     private int size = 0;
 
-    public void add(Employee value) {
+    public void add(Employee employee) {
         if (size == employees.length) {
             extend();
         }
-        employees[size++] = value;
+        employees[size++] = employee;
     }
 
     public void extend() {
@@ -23,19 +23,29 @@ public class EmployStorage {
         }
         employees = result;
     }
+
     public void print() {
         for (int i = 0; i < size; i++) {
             System.out.println(employees[i] + " ");
         }
     }
+
+    public void printByStatus(boolean isActive) {
+        for (int i = 0; i < size; i++) {
+            if (employees[i].isActive() == isActive){
+                System.out.println(employees[i]);
+            }
+        }
+    }
+
     public Employee getEmployeeById(String employeeID) {
         for (int i = 0; i < size; i++) {
             Employee employee = employees[i];
             if (employee.getEmployeeID().contains(employeeID)) {
-             return employee;
+                return employee;
             }
         }
-        return null ;
+        return null;
     }
 
     public void searchByCompany(String companyName) {
@@ -48,17 +58,17 @@ public class EmployStorage {
     }
 
 
+    public void searchBySalaryRange(double minPrice, double maxPrice) {
+        for (int i = 0; i < size; i++) {
+            Employee employee = employees[i];
+            if (employee.getSalary() >= minPrice
+                    && employee.getSalary() <= maxPrice) {
+                System.out.println(employee);
 
+            }
 
-
-
-
-
-
-
-
-
-
+        }
+    }
 }
 
 
