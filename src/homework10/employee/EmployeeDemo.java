@@ -141,8 +141,6 @@ public class EmployeeDemo {
         String employeeId = employeeData[2];
         String employeeDatum = employeeData[6];
         Date parse = sdf.parse(employeeDatum);
-
-
         Employee employeeID = employStorage.getEmployeeById(employeeId);
         if (employeeID == null) {
             Date date = new Date();
