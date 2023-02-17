@@ -15,7 +15,7 @@ public class EmployeeDemo {
     }
 
 
-    public static void employeeMet() throws ParseException {
+    private static void employeeMet() throws ParseException {
 
         boolean isRun = true;
         while (isRun) {
@@ -144,9 +144,8 @@ public class EmployeeDemo {
         Employee employeeID = employStorage.getEmployeeById(employeeId);
         if (employeeID == null) {
             Date date = new Date();
-            String format = sdf.format(date);
             Employee employee = new Employee(employeeData[0], employeeData[1], employeeId,
-                    Double.parseDouble(employeeData[3]), employeeData[4], employeeData[5], format, parse);
+                    Double.parseDouble(employeeData[3]), employeeData[4], employeeData[5], date, parse);
             employStorage.add(employee);
             System.out.println("Employee was added!");
         } else {

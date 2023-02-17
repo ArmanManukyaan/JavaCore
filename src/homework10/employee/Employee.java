@@ -12,17 +12,17 @@ public class Employee {
     private String company;
     private String position;
     private boolean active = true;
-    private String registerDate;
+    private Date registerDate;
     private Date dateOfBirthday;
 
-    public Employee(String name, String surname, String employeeID, double salary, String company, String position, String registerDate, Date dateOfBirthday) {
+    public Employee(String name, String surname, String employeeID, double salary, String company, String position, Date registerDate, Date dateOfBirthday) {
         this.name = name;
         this.surname = surname;
         this.employeeID = employeeID;
         this.salary = salary;
         this.company = company;
         this.position = position;
-        this.registerDate = String.valueOf(registerDate);
+        this.registerDate = registerDate;
         this. dateOfBirthday = dateOfBirthday;
     }
 
@@ -34,11 +34,11 @@ public class Employee {
         this.dateOfBirthday = dateOfBirthday;
     }
 
-    public String getRegisterDate() {
+    public Date getRegisterDate() {
         return registerDate;
     }
 
-    public void setRegisterDate(String registerDate) {
+    public void setRegisterDate(Date registerDate) {
         this.registerDate = registerDate;
     }
 
