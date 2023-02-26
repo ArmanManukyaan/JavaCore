@@ -48,6 +48,7 @@ public class MedicalCenterDemo implements Commands {
             }
         }
     }
+
     private static void printAllPatientsByDoctor() {
         personStorage.printDoctors();
         System.out.println("please input doctors id");
@@ -59,6 +60,7 @@ public class MedicalCenterDemo implements Commands {
             System.out.println("doctor with " + Id + " dose not exits!");
         }
     }
+
     private static void addPatient() {
         personStorage.printDoctors();
         System.out.println("please input doctors id");
@@ -96,7 +98,7 @@ public class MedicalCenterDemo implements Commands {
         Doctor doctorById = personStorage.getDoctorById(Id);
         if (doctorById != null) {
             System.out.println("please input name,surname,email,phone,profession");
-            listProfession();
+            personStorage.listProfession();
             String doctorDataStr = scanner.nextLine();
             String[] doctorData = doctorDataStr.split(",");
             String doctorDatum = doctorData[4];
@@ -136,7 +138,7 @@ public class MedicalCenterDemo implements Commands {
 
     private static void addDoctor() {
         System.out.println("please input id,name,surname,email,phone,profession");
-        listProfession();
+        personStorage.listProfession();
         String doctorDataStr = scanner.nextLine();
         String[] doctorData = doctorDataStr.split(",");
         String doctorId = doctorData[0];
@@ -161,7 +163,7 @@ public class MedicalCenterDemo implements Commands {
         }
     }
 
-    private static void listProfession() {
+    private void listProfession() {
         System.out.println("Please choose profession");
         Profession[] values = Profession.values();
         for (Profession profession : values) {

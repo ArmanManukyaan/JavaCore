@@ -96,36 +96,44 @@ public class PersonStorage {
         }
     }
 
+    public void listProfession() {
+        System.out.println("Please choose profession");
+        Profession[] values = Profession.values();
+        for (Profession profession : values) {
+            System.out.println(profession);
 
-    private void deletePersonByIndex(int i) {
-        for (int j = i; j < size; j++) {
-            persons[j] = persons[j + 1];
         }
-        size--;
     }
 
-    private void extend() {
-        Person[] tmp = new Person[persons.length + 10];
-        System.arraycopy(persons, 0, tmp, 0, size);
-        persons = tmp;
-    }
+        private void deletePersonByIndex ( int i){
+            for (int j = i; j < size; j++) {
+                persons[j] = persons[j + 1];
+            }
+            size--;
+        }
+
+        private void extend () {
+            Person[] tmp = new Person[persons.length + 10];
+            System.arraycopy(persons, 0, tmp, 0, size);
+            persons = tmp;
+        }
 
 
-    public boolean isDoctorAvailable(Date registerDataTime, Doctor doctor) {
-        for (int i = 0; i < size; i++) {
-            Person person = persons[i];
-            if (person instanceof Patients) {
-                Patients patients = (Patients) person;
-                if (patients.getDoctor().equals(doctor) &&
-                        patients.getRegisterDateTime().equals(registerDataTime)) {
-                    return false;
+        public boolean isDoctorAvailable (Date registerDataTime, Doctor doctor){
+            for (int i = 0; i < size; i++) {
+                Person person = persons[i];
+                if (person instanceof Patients) {
+                    Patients patients = (Patients) person;
+                    if (patients.getDoctor().equals(doctor) &&
+                            patients.getRegisterDateTime().equals(registerDataTime)) {
+                        return false;
+                    }
                 }
             }
+            return true;
         }
-        return true;
+
     }
 
-
-}
 
 
