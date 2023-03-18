@@ -1,6 +1,6 @@
 package fileutil;
 
-import java.io.File;
+import java.io.*;
 import java.util.Scanner;
 
 public class FileUtil {
@@ -12,10 +12,13 @@ public class FileUtil {
         contentSearch();
 
         printSizeOfPackage();
+
+        findLines();
+
+        createFileWithContent();
     }
 
-
-    static boolean fileSearch() {
+    public static boolean fileSearch() {
         String path = scanner.nextLine();
         String fileName = scanner.nextLine();
         File file = new File(path + "\\" + fileName);
@@ -23,10 +26,9 @@ public class FileUtil {
             return true;
         }
         return false;
-
     }
 
-    static void contentSearch() {
+    public static void contentSearch() {
         String path = scanner.nextLine();
         String fileName = scanner.nextLine();
         File fileNam = new File(fileName);
@@ -39,13 +41,18 @@ public class FileUtil {
             }
         }
     }
-
-    //այս մեթոդը պետք է սքաններով վերցնի երկու string.
-    // 1 - txtPath txt ֆայլի փաթը
-    // 2 - keyword - ինչ որ բառ
-    // տալու ենք txt ֆայլի տեղը, ու ինչ որ բառ, ինքը տպելու է էն տողերը, որտեղ գտնի էդ բառը։
     static void findLines() {
-
+        String txtPath = scanner.nextLine();
+        String keyword = scanner.nextLine();
+        try (BufferedReader bw = new BufferedReader(new FileReader(txtPath))) {
+            String line = "";
+            while ((line = bw.readLine()) != null) {
+                if (line.contains(keyword))
+                    System.out.println(line);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     static void printSizeOfPackage() {
@@ -63,14 +70,26 @@ public class FileUtil {
         }
     }
 
-    //այս մեթոդը պետք է սքաններով վերցնի երեք string.
-    // 1 - path պապկի տեղը, թե որտեղ է սարքելու նոր ֆայլը
-    // 2 - fileName ֆայլի անունը, թե ինչ անունով ֆայլ է սարքելու
-    // 3 - content ֆայլի պարունակությունը։ Այսինքն ստեղծված ֆայլի մեջ ինչ է գրելու
-    // որպես արդյունք պապկի մեջ սարքելու է նոր ֆայլ, իրա մեջ էլ լինելու է content-ով տվածը
     static void createFileWithContent() {
-
+        String path = scanner.nextLine();
+        String fileName = scanner.nextLine();
+        String content = scanner.nextLine();
+        File file = new File(path + "\\" + fileName);
+        if (file.exists()) {
+            System.out.println("file exists");
+        } else {
+            try {
+                file.createNewFile();
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+            try (BufferedWriter bw = new BufferedWriter(new FileWriter(file))) {
+                bw.write(content);
+            } catch (IOException c) {
+                c.printStackTrace();
+            }
+        }
     }
-
-
 }
+
+
