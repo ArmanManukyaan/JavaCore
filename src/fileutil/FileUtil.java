@@ -7,89 +7,145 @@ public class FileUtil {
     private static Scanner scanner = new Scanner(System.in);
 
     public static void main(String[] args) {
-        System.out.println(fileSearch());
+//        System.out.println("please input folder path");
+//        String folderPath = scanner.nextLine();
+//        System.out.println("please input file Name");
+//        String fileName = scanner.nextLine();
+//        fileSearch(folderPath, fileName);
 
-        contentSearch();
+        System.out.println();
+//
+//        System.out.println("please input folder path");
+//        String folderPath = scanner.nextLine();
+//        System.out.println("please input keyword");
+//        String keyword = scanner.nextLine();
+//        contentSearch(folderPath, keyword);
+//
+//        System.out.println();
+//
+//        System.out.println("please input file path");
+//        String filePath = scanner.nextLine();
+//        System.out.println("please input keyword");
+//        String keyword = scanner.nextLine();
+//        findLines(filePath, keyword);
 
-        printSizeOfPackage();
+//        System.out.println();
+//
+//
+//        System.out.println("please input folder path");
+//        String folderPath = scanner.nextLine();
+//        printSizeOfPackage(folderPath);
 
-        findLines();
+        System.out.println();
 
-        createFileWithContent();
+
+        System.out.println("please input folder path");
+        String folderPath = scanner.nextLine();
+        System.out.println("please input file name");
+        String fileName = scanner.nextLine();
+        System.out.println("please input content");
+        String content = scanner.nextLine();
+        createFileWithContent(folderPath, fileName, content);
+
     }
 
-    public static boolean fileSearch() {
-        String path = scanner.nextLine();
-        String fileName = scanner.nextLine();
-        File file = new File(path + "\\" + fileName);
-        if (file.exists()) {
-            return true;
+    public static void fileSearch(String folder, String fileName) {
+        File folderFile = new File(folder);
+        if (!folderFile.isDirectory()) {
+            System.out.println("Wrong folder Path name");
+            return;
         }
-        return false;
+        File[] listOfFile = folderFile.listFiles();
+        boolean isFound = false;
+        for (File file : listOfFile) {
+            if (file.isFile() && file.getName().contains(fileName)) {
+                isFound = true;
+                break;
+            }
+        }
+        System.out.println(isFound);
     }
 
-    public static void contentSearch() {
-        String path = scanner.nextLine();
-        String fileName = scanner.nextLine();
-        File fileNam = new File(fileName);
-        File file = new File(path);
-        String[] list = file.list();
-        for (String s : list) {
-            if (s.contains(fileName)) {
-                System.out.println("FileName " + s);
-
+    public static void contentSearch(String folder, String keyword) {
+        File folderFile = new File(folder);
+        if (!folderFile.isDirectory()) {
+            System.out.println("Wrong folder Path name");
+            return;
+        }
+        File[] lisFile = folderFile.listFiles();
+        for (File file : lisFile) {
+            if (file.isFile() && file.getName().endsWith(".txt")) {
+                try (BufferedReader bufferedReader = new BufferedReader(new FileReader(file))) {
+                    String line = null;
+                    while ((line = bufferedReader.readLine()) != null) {
+                        if (line.contains(keyword)) {
+                            System.out.println(file);
+                            break;
+                        }
+                    }
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
             }
         }
     }
-    static void findLines() {
-        String txtPath = scanner.nextLine();
-        String keyword = scanner.nextLine();
-        try (BufferedReader bw = new BufferedReader(new FileReader(txtPath))) {
-            String line = "";
-            while ((line = bw.readLine()) != null) {
-                if (line.contains(keyword))
-                    System.out.println(line);
+
+    static void findLines(String filePath, String keyword) {
+        File file = new File(filePath);
+        if (!file.exists() || !file.getName().endsWith(".txt")) {
+            System.out.println("wrong file or file path!");
+            return;
+        }
+        try (BufferedReader bufferedReader = new BufferedReader(new FileReader(file))) {
+            String line = null;
+            int lineNumber = 1;
+            while ((line = bufferedReader.readLine()) != null) {
+                if (line.contains(keyword)) {
+                    System.out.println(lineNumber + " " + line);
+                }
+                lineNumber++;
             }
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    static void printSizeOfPackage() {
+    static void printSizeOfPackage(String folderPath) {
+        File folderFile = new File(folderPath);
+        if (!folderFile.isDirectory()) {
+            System.out.println("wrong file or file path!");
+            return;
+        }
+        File[] files = folderFile.listFiles();
         long size = 0;
-        String path = scanner.nextLine();
-        File file = new File(path);
-        if (file.exists() && file.isDirectory()) {
-            File[] files = file.listFiles();
-            for (File x : files) {
-                if (x.isFile()) {
-                    size += file.length();
+        for (File file : files) {
+            if (file.isFile()) {
+                size += file.length();
+                System.out.println("size:" + size / 1024 + "KB ");
+            }
+        }
+    }
+
+    static void createFileWithContent(String folderPath, String fileName, String content) {
+        File folderFile = new File(folderPath);
+        if (!folderFile.isDirectory()) {
+            System.out.println("wrong file or file path!");
+            return;
+        }
+        File file = new File(folderFile, fileName);
+        if (file.exists()) {
+            System.out.println("file already exists");
+            return;
+        }
+        try {
+            boolean newFile = file.createNewFile();
+            if (newFile) {
+                try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(file))) {
+                    bufferedWriter.write(content);
                 }
             }
-            System.out.println("Folder size: " + size + " bytes");
-        }
-    }
-
-    static void createFileWithContent() {
-        String path = scanner.nextLine();
-        String fileName = scanner.nextLine();
-        String content = scanner.nextLine();
-        File file = new File(path + "\\" + fileName);
-        if (file.exists()) {
-            System.out.println("file exists");
-        } else {
-            try {
-                file.createNewFile();
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
-            try (BufferedWriter bw = new BufferedWriter(new FileWriter(file))) {
-                bw.write(content);
-            } catch (IOException c) {
-                c.printStackTrace();
+            } catch(IOException e){
+                e.printStackTrace();
             }
         }
     }
-}
-
-
